@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StockMind — Déposer un avis</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#081828;--navy2:#0C2035;
+  --blue:#1A5FE8;--blue2:#2B7BFF;
+  --green:#00C97A;--green2:#00A864;
+  --grad:linear-gradient(135deg,#00C97A 0%,#1A5FE8 100%);
+  --txt:#EDF2FF;--txts:#6B8CAE;
+  --brd:rgba(26,95,232,0.14);
+  --font:'Outfit',sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--navy);color:var(--txt);min-height:100vh;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(26,95,232,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(26,95,232,0.018) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;}
+
+/* HEADER */
+.header{background:rgba(6,14,26,.97);border-bottom:1px solid var(--brd);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;backdrop-filter:blur(18px);}
+.logo-row{display:flex;align-items:center;gap:11px;}
+.logo-name{font-size:18px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-sub{font-size:8px;color:var(--txts);letter-spacing:1.5px;font-family:var(--mono);}
+.header-right{display:flex;align-items:center;gap:10px;}
+.btn-link{padding:8px 16px;background:var(--grad);color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:opacity .15s;}
+.btn-link:hover{opacity:.88;}
+.btn-ghost{padding:7px 14px;background:transparent;color:var(--green);border:1px solid rgba(0,201,122,.25);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:all .13s;}
+.btn-ghost:hover{background:rgba(0,201,122,.07);}
+
+/* PAGE LAYOUT */
+.page-wrap{max-width:680px;margin:0 auto;padding:32px 16px 48px;}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:32px;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,201,122,.1);border:1px solid rgba(0,201,122,.2);border-radius:20px;padding:5px 14px;font-size:11px;font-family:var(--mono);color:var(--green);letter-spacing:1px;margin-bottom:14px;}
+.hero h1{font-size:28px;font-weight:800;color:var(--txt);margin-bottom:8px;line-height:1.2;}
+.hero p{font-size:14px;color:var(--txts);line-height:1.6;max-width:480px;margin:0 auto;}
+
+/* STATS BAR */
+.stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px;}
+.stat-box{background:rgba(12,32,53,.9);border:1px solid var(--brd);border-radius:12px;padding:14px;text-align:center;}
+.stat-val{font-size:22px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-lbl{font-size:10px;color:var(--txts);font-family:var(--mono);margin-top:2px;}
+
+/* FORM CARD */
+.form-card{background:rgba(12,32,53,.92);border:1px solid var(--brd);border-radius:16px;padding:28px;position:relative;overflow:hidden;margin-bottom:20px;}
+.form-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad);}
+.form-section-title{font-size:10px;font-family:var(--mono);color:var(--txts);letter-spacing:2px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--brd);}
+
+/* STARS */
+.star-wrap{margin-bottom:20px;}
+.star-lbl{font-size:11px;font-family:var(--mono);color:var(--txts);letter-spacing:.5px;margin-bottom:8px;display:block;}
+.star-row{display:flex;gap:10px;margin-bottom:6px;}
+.star{font-size:38px;cursor:pointer;color:rgba(255,215,0,.15);transition:all .12s;user-select:none;line-height:1;}
+.star:hover,.star.on{color:#FFD700;text-shadow:0 0 16px rgba(255,215,0,.4);}
+.star-desc{font-size:12px;color:var(--txts);font-family:var(--mono);min-height:18px;transition:color .13s;}
+.star-desc.set{color:var(--green);}
+
+/* INPUTS */
+.fl{margin-bottom:14px;}
+.fl label{font-size:10px;font-family:var(--mono);color:var(--txts);letter-spacing:.5px;display:flex;align-items:center;gap:5px;margin-bottom:6px;}
+.req{color:#FF6B6B;font-size:11px;}
+.inp{width:100%;padding:11px 14px;background:rgba(26,95,232,.06);border:1px solid var(--brd);border-radius:10px;color:var(--txt);font-family:var(--font);font-size:13px;outline:none;transition:border-color .13s;}
+.inp:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(0,201,122,.08);}
+.inp::placeholder{color:rgba(107,140,174,.4);}
+select.inp option{background:var(--navy2);color:var(--txt);}
+textarea.inp{resize:vertical;min-height:90px;line-height:1.6;}
+.char-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px;}
+.char-cnt{font-size:10px;font-family:var(--mono);color:var(--txts);}
+.err{font-size:11px;color:#FF6B6B;margin-top:4px;display:none;align-items:center;gap:4px;}
+.err.show{display:flex;}
+
+/* SUBMIT */
+.btn-submit{width:100%;padding:14px;background:var(--grad);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .2s;letter-spacing:.3px;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:8px;}
+.btn-submit:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,201,122,.2);}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* SUCCESS */
+.success-overlay{display:none;text-align:center;padding:40px 20px;}
+.success-overlay.show{display:block;}
+.success-ic{font-size:60px;margin-bottom:14px;animation:pop .4s ease;}
+@keyframes pop{0%{transform:scale(0.5);opacity:0;}70%{transform:scale(1.1);}100%{transform:scale(1);opacity:1;}}
+.success-title{font-size:22px;font-weight:700;color:var(--txt);margin-bottom:8px;}
+.success-sub{font-size:14px;color:var(--txts);line-height:1.6;}
+.btn-another{display:inline-flex;align-items:center;gap:6px;margin-top:18px;padding:10px 22px;background:transparent;color:var(--green);border:1px solid rgba(0,201,122,.3);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--font);transition:all .15s;}
+.btn-another:hover{background:rgba(0,201,122,.08);}
+
+/* RECENT AVIS */
+.recent-title{font-size:14px;font-weight:700;color:var(--txt);margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;}
+.rv-card{background:rgba(12,32,53,.9);border:1px solid var(--brd);border-radius:12px;padding:14px;margin-bottom:10px;transition:border-color .15s;}
+.rv-card:hover{border-color:rgba(0,201,122,.2);}
+.rv-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
+.rv-stars{color:#FFD700;font-size:14px;letter-spacing:2px;}
+.rv-pill{font-size:9px;padding:2px 8px;border-radius:10px;font-weight:600;}
+.rv-pill.pos{background:rgba(0,201,122,.12);color:var(--green);}
+.rv-pill.neu{background:rgba(107,140,174,.12);color:var(--txts);}
+.rv-pill.neg{background:rgba(255,107,107,.12);color:#FF6B6B;}
+.rv-prod{font-size:10px;font-family:var(--mono);color:var(--txts);margin-left:auto;}
+.rv-txt{font-size:12px;color:var(--txt);line-height:1.55;font-style:italic;}
+.rv-meta{font-size:10px;color:var(--txts);margin-top:4px;font-family:var(--mono);}
+
+/* NPS ROW */
+.nps-row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0;}
+.nps-btn{width:40px;height:40px;border-radius:8px;border:1px solid var(--brd);background:rgba(26,95,232,.06);color:var(--txts);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);transition:all .13s;display:flex;align-items:center;justify-content:center;}
+.nps-btn:hover{border-color:rgba(0,201,122,.3);color:var(--txt);}
+.nps-btn.on{background:var(--grad);color:#fff;border-color:transparent;}
+
+/* FOOTER */
+.footer{text-align:center;padding:20px 0 8px;font-size:11px;color:var(--txts);font-family:var(--mono);}
+.footer a{color:var(--green);text-decoration:none;}
+
+@media(max-width:600px){.hero h1{font-size:22px;}.stats-bar{grid-template-columns:1fr;}.form-card{padding:18px;}.star{font-size:30px;}.header{padding:12px 16px;}.logo-sub{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+ <div class="logo-row">
+  <svg width="36" height="36" viewBox="0 0 44 44" fill="none">
+   <defs>
+    <linearGradient id="hG" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00C97A"/><stop offset="100%" stop-color="#1A5FE8"/></linearGradient>
+   </defs>
+   <path d="M22 2 L38 11.5 L38 32.5 L22 42 L6 32.5 L6 11.5 Z" stroke="url(#hG)" stroke-width="2" fill="none"/>
+   <rect x="8" y="26" width="3" height="8" fill="#00C97A" rx="0.5"/><rect x="12" y="22" width="3" height="12" fill="#00C97A" rx="0.5"/><rect x="16" y="18" width="3" height="16" fill="#00C97A" rx="0.5"/>
+   <polygon points="22,14 32,19 22,24 12,19" fill="#4DB8FF" opacity="0.85"/>
+   <polygon points="32,19 32,31 22,36 22,24" fill="#1A5FE8"/>
+   <polygon points="22,24 22,36 12,31 12,19" fill="#2B7BFF" opacity="0.7"/>
+   <circle cx="36" cy="18" r="2" fill="#1A5FE8"/><circle cx="39" cy="22" r="1.5" fill="#2B7BFF"/><circle cx="36" cy="26" r="2" fill="#1A5FE8"/>
+   <line x1="36" y1="18" x2="39" y2="22" stroke="#2B7BFF" stroke-width="1"/><line x1="39" y1="22" x2="36" y2="26" stroke="#2B7BFF" stroke-width="1"/>
+  </svg>
+  <div>
+   <div class="logo-name">StockMind</div>
+   <div class="logo-sub">SMART STOCK · BIGGER SUCCESS</div>
+  </div>
+ </div>
+ <div class="header-right">
+  <a href="index.html" class="btn-ghost">← Tableau de bord</a>
+ </div>
+</div>
+
+<div class="page-wrap">
+
+ <!-- HERO -->
+ <div class="hero">
+  <div class="hero-badge">⭐ VOTRE AVIS COMPTE</div>
+  <h1>Partagez votre expérience</h1>
+  <p>Votre retour nous aide à améliorer nos cafés et services. Chaque avis est analysé par notre IA pour mieux vous servir.</p>
+ </div>
+
+ <!-- STATS BAR -->
+ <div class="stats-bar">
+  <div class="stat-box"><div class="stat-val" id="s-total">—</div><div class="stat-lbl">AVIS REÇUS</div></div>
+  <div class="stat-box"><div class="stat-val" id="s-note">—</div><div class="stat-lbl">NOTE MOYENNE</div></div>
+  <div class="stat-box"><div class="stat-val" id="s-sat">—</div><div class="stat-lbl">SATISFACTION</div></div>
+ </div>
+
+ <!-- FORM CARD -->
+ <div class="form-card" id="form-section">
+  <div class="form-section-title">ÉVALUATION PRODUIT · FORMULAIRE CLIENT</div>
+
+  <!-- ÉTOILES -->
+  <div class="star-wrap">
+   <span class="star-lbl">NOTE GLOBALE <span class="req">*</span></span>
+   <div class="star-row" id="stars">
+    <span class="star" data-v="1" onclick="setNote(1)">★</span>
+    <span class="star" data-v="2" onclick="setNote(2)">★</span>
+    <span class="star" data-v="3" onclick="setNote(3)">★</span>
+    <span class="star" data-v="4" onclick="setNote(4)">★</span>
+    <span class="star" data-v="5" onclick="setNote(5)">★</span>
+   </div>
+   <div class="star-desc" id="star-desc">Cliquez pour évaluer</div>
+   <div class="err" id="err-note">⚠ Veuillez attribuer une note.</div>
+  </div>
+
+  <!-- NPS (recommandation 0-10) -->
+  <div class="fl">
+   <label>RECOMMANDERIEZ-VOUS ? <span style="color:var(--txts);font-size:9px;">(0 = pas du tout · 10 = absolument)</span></label>
+   <div class="nps-row" id="nps-row">
+    <button class="nps-btn" onclick="setNPS(0)">0</button><button class="nps-btn" onclick="setNPS(1)">1</button>
+    <button class="nps-btn" onclick="setNPS(2)">2</button><button class="nps-btn" onclick="setNPS(3)">3</button>
+    <button class="nps-btn" onclick="setNPS(4)">4</button><button class="nps-btn" onclick="setNPS(5)">5</button>
+    <button class="nps-btn" onclick="setNPS(6)">6</button><button class="nps-btn" onclick="setNPS(7)">7</button>
+    <button class="nps-btn" onclick="setNPS(8)">8</button><button class="nps-btn" onclick="setNPS(9)">9</button>
+    <button class="nps-btn" onclick="setNPS(10)">10</button>
+   </div>
+   <div style="font-size:10px;color:var(--txts);margin-top:4px;font-family:var(--mono);" id="nps-lbl">—</div>
+  </div>
+
+  <!-- PRODUIT + NOM -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+   <div class="fl">
+    <label>PRODUIT CONCERNÉ <span class="req">*</span></label>
+    <select class="inp" id="f-prod"><option value="">— Sélectionner —</option></select>
+    <div class="err" id="err-prod">⚠ Sélectionnez un produit.</div>
+   </div>
+   <div class="fl">
+    <label>VOTRE NOM <span class="req">*</span></label>
+    <input class="inp" id="f-nom" placeholder="Ex : Marie Dupont" maxlength="60">
+    <div class="err" id="err-nom">⚠ Entrez votre nom.</div>
+   </div>
+  </div>
+
+  <!-- AVIS -->
+  <div class="fl">
+   <label>VOTRE AVIS <span class="req">*</span></label>
+   <textarea class="inp" id="f-avis" maxlength="500" placeholder="Décrivez votre expérience avec ce café... (minimum 15 caractères)" oninput="updChar()"></textarea>
+   <div class="char-row">
+    <div class="err" id="err-avis" style="margin-top:0;">⚠ Minimum 15 caractères.</div>
+    <div class="char-cnt"><span id="char-c">0</span>/500</div>
+   </div>
+  </div>
+
+  <!-- POINTS POSITIFS / NÉGATIFS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+   <div class="fl">
+    <label>CE QUE VOUS AVEZ AIMÉ <span style="color:var(--txts);font-size:9px;">(optionnel)</span></label>
+    <input class="inp" id="f-pos" placeholder="Ex : goût, service, prix..." maxlength="100">
+   </div>
+   <div class="fl">
+    <label>CE QUI PEUT ÊTRE AMÉLIORÉ <span style="color:var(--txts);font-size:9px;">(optionnel)</span></label>
+    <input class="inp" id="f-neg" placeholder="Ex : attente, quantité..." maxlength="100">
+   </div>
+  </div>
+
+  <button class="btn-submit" onclick="submitAvis()" id="submit-btn">
+   <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   Soumettre mon avis
+  </button>
+ </div>
+
+ <!-- SUCCESS -->
+ <div class="form-card success-overlay" id="success-section">
+  <div class="success-ic">✅</div>
+  <div class="success-title">Merci pour votre avis !</div>
+  <div class="success-sub">Votre retour a bien été enregistré et sera analysé par notre IA StockMind.<br>Il apparaîtra dans le tableau de bord et dans les statistiques clients.</div>
+  <button class="btn-another" onclick="resetForm()">
+   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12l7-7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+   Déposer un autre avis
+  </button>
+ </div>
+
+ <!-- AVIS RÉCENTS -->
+ <div>
+  <div class="recent-title">
+   Avis récents <span style="font-size:10px;font-family:var(--mono);color:var(--txts);" id="rv-count-lbl">—</span>
+  </div>
+  <div id="rv-list"></div>
+ </div>
+
+ <div class="footer">
+  StockMind · Smart Stock. Bigger Success.<br>
+  <a href="index.html">← Retour au tableau de bord</a>
+ </div>
+</div>
+
+<script>
+const AKEY='sm_avis_v3', PKEY='sm_prods_v3';
+let selNote=0, selNPS=null;
+
+const NL={1:'😞 Très déçu — Nous sommes désolés',2:'😐 Décevant — Nous allons nous améliorer',3:'😊 Correct — Merci pour votre retour',4:'👍 Bien — Nous sommes ravis !',5:'🌟 Excellent — Vous nous ravissez !'};
+const NPSL={0:'Pas du tout',1:'Peu probable',2:'Peu probable',3:'Peu probable',4:'Peu probable',5:'Neutre',6:'Neutre',7:'Probable',8:'Probable',9:'Très probable',10:'Absolument ! Promoteur'};
+
+function setNote(n){selNote=n;document.querySelectorAll('.star').forEach(s=>s.classList.toggle('on',+s.dataset.v<=n));const d=document.getElementById('star-desc');d.textContent=NL[n];d.classList.add('set');document.getElementById('err-note').classList.remove('show');}
+function setNPS(n){selNPS=n;document.querySelectorAll('.nps-btn').forEach((b,i)=>b.classList.toggle('on',i===n));document.getElementById('nps-lbl').textContent=NPSL[n]||'';}
+function updChar(){document.getElementById('char-c').textContent=document.getElementById('f-avis').value.length;}
+
+function analyseNLP(t){
+ const l=t.toLowerCase();let sc=0;
+ if(l.includes('pas cher')||l.includes('petit prix'))sc+=.5;
+ if(l.includes('trop coûteux'))sc-=.4;if(l.includes('prix élevé'))sc-=.2;
+ ['excellent','très bon','super','parfait','satisfait','recommande','top','agréable','bon','raisonnable','correct','délicieux','savoureux'].forEach(k=>{if(l.includes(k))sc+=.2;});
+ ['cher','coûteux','décevant','mauvais','froid','nul','problème','attente'].forEach(k=>{if(l.includes(k)&&!l.includes('pas cher'))sc-=.15;});
+ sc=Math.max(-1,Math.min(1,sc));return sc>.1?'positif':sc<-.1?'négatif':'neutre';
+}
+
+function loadAvis(){const d=localStorage.getItem(AKEY);return d?JSON.parse(d):[];}
+function saveAvis(a){localStorage.setItem(AKEY,JSON.stringify(a));}
+function loadProds(){const d=localStorage.getItem(PKEY);if(d)return JSON.parse(d);return [{nom:'Latte'},{nom:'Americano with Milk'},{nom:'Cappuccino'},{nom:'Americano'},{nom:'Hot Chocolate'},{nom:'Cocoa'},{nom:'Cortado'},{nom:'Espresso'}];}
+
+function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
+function starsColor(n){return`<span style="color:#FFD700;font-size:14px;letter-spacing:2px;">${'★'.repeat(n)}</span><span style="color:rgba(255,215,0,.2);font-size:14px;letter-spacing:2px;">${'☆'.repeat(5-n)}</span>`;}
+
+function populateStats(){
+ const avis=loadAvis();
+ const total=avis.length;
+ const note=total?avis.reduce((s,a)=>s+a.note,0)/total:0;
+ const pos=avis.filter(a=>a.sentiment==='positif').length;
+ const sat=total?Math.round(pos/total*100):0;
+ document.getElementById('s-total').textContent=total;
+ document.getElementById('s-note').textContent=total?(note.toFixed(1)+' ★'):'—';
+ document.getElementById('s-sat').textContent=total?(sat+' %'):'—';
+}
+
+function populateProducts(){
+ const sel=document.getElementById('f-prod');
+ const prods=loadProds();
+ sel.innerHTML='<option value="">— Sélectionner —</option>'+prods.map(p=>`<option value="${p.nom}">${p.nom}</option>`).join('');
+}
+
+function renderAvis(){
+ const avis=loadAvis();
+ const recent=[...avis].reverse().slice(0,10);
+ document.getElementById('rv-count-lbl').textContent=avis.length+' avis';
+ document.getElementById('rv-list').innerHTML=recent.length===0
+  ?'<div style="text-align:center;padding:30px;color:var(--txts);font-size:13px;background:rgba(12,32,53,.6);border-radius:12px;border:1px solid var(--brd);">Soyez le premier à déposer un avis ! ☕</div>'
+  :recent.map(a=>`
+  <div class="rv-card">
+   <div class="rv-top">
+    ${starsColor(a.note)}
+    <span class="rv-pill ${a.sentiment==='positif'?'pos':a.sentiment==='négatif'?'neg':'neu'}">${a.sentiment}</span>
+    <span class="rv-prod">${a.produit}</span>
+   </div>
+   <div class="rv-txt">"${a.texte}"</div>
+   <div class="rv-meta">${a.auteur} · ${a.date}${a.nps!=null?' · NPS: '+a.nps+'/10':''}</div>
+  </div>`).join('');
+}
+
+function validate(){
+ let ok=true;
+ document.querySelectorAll('.err').forEach(e=>e.classList.remove('show'));
+ if(!selNote){document.getElementById('err-note').classList.add('show');ok=false;}
+ if(!document.getElementById('f-prod').value){document.getElementById('err-prod').classList.add('show');ok=false;}
+ if(!document.getElementById('f-nom').value.trim()){document.getElementById('err-nom').classList.add('show');ok=false;}
+ if(document.getElementById('f-avis').value.trim().length<15){document.getElementById('err-avis').classList.add('show');ok=false;}
+ return ok;
+}
+
+function submitAvis(){
+ if(!validate())return;
+ const btn=document.getElementById('submit-btn');btn.disabled=true;btn.textContent='Envoi en cours...';
+ const texte=document.getElementById('f-avis').value.trim();
+ const sentiment=analyseNLP(texte);
+ const avis=loadAvis();
+ avis.push({
+  id:Math.max(0,...avis.map(a=>a.id||0))+1,
+  produit:document.getElementById('f-prod').value,
+  auteur:document.getElementById('f-nom').value.trim(),
+  note:selNote, texte, sentiment,
+  nps:selNPS,
+  positif:document.getElementById('f-pos').value.trim()||null,
+  negatif:document.getElementById('f-neg').value.trim()||null,
+  date:new Date().toISOString().slice(0,10),
+ });
+ saveAvis(avis);
+ setTimeout(()=>{
+  document.getElementById('form-section').style.display='none';
+  document.getElementById('success-section').classList.add('show');
+  populateStats();renderAvis();
+ },600);
+}
+
+function resetForm(){
+ selNote=0;selNPS=null;
+ document.querySelectorAll('.star').forEach(s=>s.classList.remove('on'));
+ document.getElementById('star-desc').textContent='Cliquez pour évaluer';
+ document.getElementById('star-desc').classList.remove('set');
+ document.querySelectorAll('.nps-btn').forEach(b=>b.classList.remove('on'));
+ document.getElementById('nps-lbl').textContent='—';
+ ['f-prod','f-nom','f-avis','f-pos','f-neg'].forEach(id=>document.getElementById(id).value='');
+ document.getElementById('char-c').textContent='0';
+ document.getElementById('form-section').style.display='block';
+ document.getElementById('success-section').classList.remove('show');
+ const btn=document.getElementById('submit-btn');btn.disabled=false;
+ btn.innerHTML='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Soumettre mon avis';
+}
+
+// Init
+populateProducts();populateStats();renderAvis();
+// Auto-refresh stats
+setInterval(()=>{populateStats();renderAvis();},15000);
+</script>
+</body>
+</html>
