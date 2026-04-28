@@ -562,7 +562,7 @@ const PKEY='sm_prods_v3',AKEY='sm_avis_v3',UKEY='sm_admin_v3';
 function loadProds(){
  const d=localStorage.getItem(PKEY);
  if(d)return JSON.parse(d);
- const def=CSV.products.map((nom,i)=>({id:i+1,nom,cat:'Café chaud',stock:[120,150,80,100,50,45,60,30][i],seuil:[20,20,15,15,10,10,10,5][i],prix:CSV.prodAvg[i],ca2024:CSV.prodCA[i],cnt2024:CSV.prodCnt[i]}));
+ const def=CSV.products.map((nom,i)=>({id:i+1,nom,cat:'Café chaud',stock:[120,150,80,100,50,45,60,30][i],seuil:[40,40,35,35,30,30,30,25][i],prix:CSV.prodAvg[i],ca2024:CSV.prodCA[i],cnt2024:CSV.prodCnt[i]}));
  localStorage.setItem(PKEY,JSON.stringify(def));return def;
 }
 function saveProds(a){localStorage.setItem(PKEY,JSON.stringify(a));}
