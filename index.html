@@ -291,7 +291,7 @@ select.inp option{background:var(--navy2);color:var(--txt);}
  <div class="topbar">
   <div>
    <div class="pg-title" id="pgt">Tableau de bord</div>
-   <div class="pg-sub"  id="pgs">3 547 transactions · 01/01/2024 to 31/12/2024  · 112 245 €</div>
+   <div class="pg-sub"  id="pgs">3 547 transactions · 01/01/2024 to 31/12/2024  · 112 245 MAD</div>
   </div>
   <div class="topbar-right">
    <button class="btn btn-ol btn-sm" onclick="exportCSV()">↓ Exporter</button>
@@ -303,9 +303,9 @@ select.inp option{background:var(--navy2);color:var(--txt);}
   <!-- ════ TABLEAU DE BORD ══════════════════════════════════════ -->
   <div class="pg on" id="pg-dash">
    <div class="krow">
-    <div class="kc"><div class="kl">REVENU TOTAL</div><div class="kv">112 245 €</div><div class="ks ku">↑ 3 547 transactions</div></div>
-    <div class="kc"><div class="kl">PANIER MOYEN</div><div class="kv">31,64 €</div><div class="ks ku">↑ par transaction</div></div>
-    <div class="kc"><div class="kl">MEILLEUR CAFÉ</div><div class="kv" style="font-size:15px;margin-top:3px;">Latte</div><div class="ks ku">↑ 26 875 € de CA</div></div>
+    <div class="kc"><div class="kl">REVENU TOTAL</div><div class="kv">112 245 MAD</div><div class="ks ku">↑ 3 547 transactions</div></div>
+    <div class="kc"><div class="kl">PANIER MOYEN</div><div class="kv">31,64 MAD</div><div class="ks ku">↑ par transaction</div></div>
+    <div class="kc"><div class="kl">MEILLEUR CAFÉ</div><div class="kv" style="font-size:15px;margin-top:3px;">Latte</div><div class="ks ku">↑ 26 875 MAD de CA</div></div>
     <div class="kc"><div class="kl">SATISFACTION</div><div class="kv" id="k-sat-dash">—</div><div class="ks ku">↑ Avis positifs</div></div>
    </div>
    <div class="r2 mb">
@@ -321,14 +321,14 @@ select.inp option{background:var(--navy2);color:var(--txt);}
 
   <!-- ════ VENTES & IA ══════════════════════════════════════════ -->
   <div class="pg" id="pg-ventes">
-   <div class="ai-box"><div class="ai-lbl">▶ ANALYSE IA · Données CSV réelles</div><div class="ai-tx">Le <strong>Latte</strong> génère le CA le plus élevé (26 875 €, 757 ventes). L'<strong>Americano with Milk</strong> a le plus grand volume (809 commandes). Le <strong>Mardi</strong> est le jour le plus rentable (18 168 €). Pic de commandes à <strong>10 h – 11 h</strong>. Paiement 100 % carte bancaire.</div></div>
+   <div class="ai-box"><div class="ai-lbl">▶ ANALYSE IA · Données CSV réelles</div><div class="ai-tx">Le <strong>Latte</strong> génère le CA le plus élevé (26 875 MAD, 757 ventes). L'<strong>Americano with Milk</strong> a le plus grand volume (809 commandes). Le <strong>Mardi</strong> est le jour le plus rentable (18 168 MAD). Pic de commandes à <strong>10 h – 11 h</strong>. Paiement 100 % carte bancaire.</div></div>
    <div class="r22 mb">
-    <div class="card"><div class="ct">CA par café <span class="ctag">€ réels</span></div><div style="position:relative;height:220px;"><canvas id="c-ca"></canvas></div></div>
+    <div class="card"><div class="ct">CA par café <span class="ctag">MAD réels</span></div><div style="position:relative;height:220px;"><canvas id="c-ca"></canvas></div></div>
     <div class="card"><div class="ct">Revenu par jour de semaine</div><div style="position:relative;height:220px;"><canvas id="c-week"></canvas></div></div>
    </div>
    <div class="r22 mb">
     <div class="card"><div class="ct">Volume des commandes <span class="ctag">unités</span></div><div style="position:relative;height:200px;"><canvas id="c-vol"></canvas></div></div>
-    <div class="card"><div class="ct">Prix moyen par café <span class="ctag">€</span></div><div style="position:relative;height:200px;"><canvas id="c-avg"></canvas></div></div>
+    <div class="card"><div class="ct">Prix moyen par café <span class="ctag">MAD</span></div><div style="position:relative;height:200px;"><canvas id="c-avg"></canvas></div></div>
    </div>
    <div class="card mb"><div class="ct">Distribution horaire <span class="ctag">Pic détecté : 10 h</span></div><div style="position:relative;height:130px;"><canvas id="c-hour2"></canvas></div></div>
   </div>
@@ -478,7 +478,7 @@ select.inp option{background:var(--navy2);color:var(--txt);}
      <div style="margin-top:11px;text-align:right;"><button class="btn btn-p btn-sm" onclick="saveStock()">💾 Enregistrer le stock</button></div>
     </div>
     <div class="card">
-     <div class="ct">Modifier les prix <span class="ctag">€ / unité</span></div>
+     <div class="ct">Modifier les prix <span class="ctag">MAD / unité</span></div>
      <table class="tbl">
       <thead><tr><th>PRODUIT</th><th>PRIX ACTUEL</th><th>NOUVEAU PRIX</th><th>VARIATION</th></tr></thead>
       <tbody id="px-tbl"></tbody>
@@ -502,7 +502,7 @@ select.inp option{background:var(--navy2);color:var(--txt);}
    <div class="fl"><label>STOCK</label><input class="inp" id="pm-stock" type="number" min="0" placeholder="0"></div>
    <div class="fl"><label>SEUIL D'ALERTE</label><input class="inp" id="pm-seuil" type="number" min="0" placeholder="10"></div>
   </div>
-  <div class="fl"><label>PRIX (€)</label><input class="inp" id="pm-prix" type="number" step="0.01" min="0" placeholder="0.00"></div>
+  <div class="fl"><label>PRIX (MAD)</label><input class="inp" id="pm-prix" type="number" step="0.01" min="0" placeholder="0.00"></div>
   <div class="f-actions"><button class="btn btn-ol" onclick="closeProdModal()">Annuler</button><button class="btn btn-p" onclick="saveProd()">Enregistrer</button></div>
  </div>
 </div>
@@ -583,7 +583,7 @@ function saveAdminStore(o){localStorage.setItem(UKEY,JSON.stringify(o));}
 
 // ══ HELPERS ══════════════════════════════════════════════════════
 function fmt(n){return Number(n).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2});}
-function fmtE(n){return n>=1000?(n/1000).toFixed(1)+' K€':n.toFixed(0)+' €';}
+function fmtE(n){return n>=1000?(n/1000).toFixed(1)+' KMAD':n.toFixed(0)+' MAD';}
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n);}
 function getStatus(p){if(p.stock===0)return{l:'Rupture',c:'pcrit'};if(p.stock<=p.seuil)return{l:'Critique',c:'pwarn'};return{l:'OK',c:'pok'};}
 function initials(name){return name.split(' ').map(w=>w[0]||'').slice(0,2).join('').toUpperCase()||'AD';}
@@ -599,7 +599,7 @@ function mk(id,type,labels,datasets,extra={}){
 
 // ══ NAV ══════════════════════════════════════════════════════════
 const PAGES={
- dash:{id:'pg-dash',t:'Tableau de bord',s:'3 547 transactions · 01/01/2024 to 31/12/2024  · 112 245 €'},
+ dash:{id:'pg-dash',t:'Tableau de bord',s:'3 547 transactions · 01/01/2024 to 31/12/2024  · 112 245 MAD'},
  ventes:{id:'pg-ventes',t:'Ventes & Analyse IA',s:'Analyse complète produit · jour · heure'},
  avis:{id:'pg-avis',t:'Avis Clients',s:'Dépôt, analyse NLP et statistiques'},
  predict:{id:'pg-predict',t:'Prédictions IA',s:'Modèle Random Forest · Prévisions 2025'},
@@ -645,7 +645,7 @@ function renderVentes(){
  mk('c-ca','bar',CSV.products,[{data:CSV.prodCA,backgroundColor:CSV.prodCA.map((_,i)=>i===0?G:i===1?B:G+'55'),borderRadius:3}],{...{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},...hOpts});
  mk('c-week','bar',CSV.weekdays,[{data:CSV.weekRev,backgroundColor:CSV.weekRev.map(v=>v===Math.max(...CSV.weekRev)?G:B+'55'),borderRadius:4}]);
  mk('c-vol','bar',CSV.products,[{data:CSV.prodCnt,backgroundColor:CSV.prodCnt.map(v=>v===Math.max(...CSV.prodCnt)?'#00E58C':G+'66'),borderRadius:3}],{...{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},...hOpts});
- mk('c-avg','bar',CSV.products,[{data:CSV.prodAvg,backgroundColor:B+'77',borderRadius:3}],{...{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},...{...hOpts,scales:{x:{grid:{color:GR},ticks:{color:TX,font:{size:9},callback:v=>v+'€'}},y:{grid:{display:false},ticks:{color:TX,font:{size:9}}}}}});
+ mk('c-avg','bar',CSV.products,[{data:CSV.prodAvg,backgroundColor:B+'77',borderRadius:3}],{...{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}}},...{...hOpts,scales:{x:{grid:{color:GR},ticks:{color:TX,font:{size:9},callback:v=>v+'MAD'}},y:{grid:{display:false},ticks:{color:TX,font:{size:9}}}}}});
  mk('c-hour2','line',CSV.hours,[{data:CSV.hourCnt,borderColor:G,backgroundColor:G+'18',borderWidth:2,pointRadius:2,pointBackgroundColor:G,fill:true,tension:.4}]);
 }
 
@@ -730,7 +730,7 @@ function doLive(){
 
 // ══ PRÉDICTIONS ══════════════════════════════════════════════════
 function renderPredict(){
- mk('c-pred','line',CSV.months,[{label:'Réel 2024',data:CSV.monthRev,borderColor:TX+'88',borderWidth:1.5,pointRadius:0,borderDash:[4,3]},{label:'Prévu 2025',data:CSV.pred25,borderColor:G,backgroundColor:G+'15',borderWidth:2,pointRadius:2,pointBackgroundColor:G,fill:true,tension:.4}],{plugins:{legend:{display:true,labels:{color:TX,font:{size:9},boxWidth:8,padding:12}}},scales:{x:{grid:{color:GR},ticks:{color:TX,font:{size:9}}},y:{grid:{color:GR},ticks:{color:TX,font:{size:9},callback:v=>v>=1000?(v/1000).toFixed(0)+' K€':v}}}});
+ mk('c-pred','line',CSV.months,[{label:'Réel 2024',data:CSV.monthRev,borderColor:TX+'88',borderWidth:1.5,pointRadius:0,borderDash:[4,3]},{label:'Prévu 2025',data:CSV.pred25,borderColor:G,backgroundColor:G+'15',borderWidth:2,pointRadius:2,pointBackgroundColor:G,fill:true,tension:.4}],{plugins:{legend:{display:true,labels:{color:TX,font:{size:9},boxWidth:8,padding:12}}},scales:{x:{grid:{color:GR},ticks:{color:TX,font:{size:9}}},y:{grid:{color:GR},ticks:{color:TX,font:{size:9},callback:v=>v>=1000?(v/1000).toFixed(0)+' KMAD':v}}}});
  document.getElementById('pred-list').innerHTML=CSV.mnames.map((m,i)=>{const pv=CSV.pred25[i],bv=CSV.monthRev[i],d=pv-bv,up=d>=0;return`<div class="prow"><span class="pmon">${m}</span><div class="pbt"><div class="pbf" style="width:${Math.round(pv/16000*100)}%;"></div></div><span class="prev2">${fmtE(pv)}</span><span class="ptrend" style="color:${up?'var(--green)':'#FF6B6B'}">${up?'↑':'↓'}${Math.abs(Math.round(d/bv*100))} %</span></div>`;}).join('');
  mk('c-pred-prod','bar',CSV.products,[{data:CSV.prodCnt.map(v=>Math.round(v*1.08/4)),backgroundColor:B+'77',borderRadius:3}],{indexAxis:'y',scales:{x:{grid:{color:GR},ticks:{color:TX,font:{size:9}}},y:{grid:{display:false},ticks:{color:TX,font:{size:9}}}}});
 }
@@ -739,14 +739,14 @@ function renderPredict(){
 function renderProds(){
  const prods=loadProds(),s=(document.getElementById('srch')?.value||'').toLowerCase();
  const list=s?prods.filter(p=>p.nom.toLowerCase().includes(s)):prods;
- document.getElementById('prod-tbl').innerHTML=list.map(p=>{const st=getStatus(p);return`<tr><td><strong>${p.nom}</strong></td><td style="color:var(--txts);font-size:11px;">${p.cat}</td><td><strong>${p.stock}</strong></td><td>${p.seuil}</td><td style="color:var(--green);font-weight:600;">${fmt(p.prix)} €</td><td style="font-family:var(--mono);font-size:11px;">${fmtE(p.ca2024||0)}</td><td style="font-family:var(--mono);font-size:11px;">${p.cnt2024||'—'}</td><td><span class="pill ${st.c}">${st.l}</span></td><td><button class="btn btn-sm btn-ol" onclick="openProdModal('edit',${p.id})" style="margin-right:4px;">✏</button><button class="btn btn-sm btn-d" onclick="delProd(${p.id})">🗑</button></td></tr>`;}).join('');
+ document.getElementById('prod-tbl').innerHTML=list.map(p=>{const st=getStatus(p);return`<tr><td><strong>${p.nom}</strong></td><td style="color:var(--txts);font-size:11px;">${p.cat}</td><td><strong>${p.stock}</strong></td><td>${p.seuil}</td><td style="color:var(--green);font-weight:600;">${fmt(p.prix)} MAD</td><td style="font-family:var(--mono);font-size:11px;">${fmtE(p.ca2024||0)}</td><td style="font-family:var(--mono);font-size:11px;">${p.cnt2024||'—'}</td><td><span class="pill ${st.c}">${st.l}</span></td><td><button class="btn btn-sm btn-ol" onclick="openProdModal('edit',${p.id})" style="margin-right:4px;">✏</button><button class="btn btn-sm btn-d" onclick="delProd(${p.id})">🗑</button></td></tr>`;}).join('');
 }
 
 // ══ STOCK & PRIX ══════════════════════════════════════════════════
 function renderStock(){
  const prods=loadProds();
  document.getElementById('stk-tbl').innerHTML=prods.map(p=>{const st=getStatus(p);return`<tr><td><strong>${p.nom}</strong></td><td><strong>${p.stock}</strong></td><td><div style="display:flex;align-items:center;gap:5px;"><button class="btn btn-sm btn-ol" onclick="adj(${p.id},-1)" style="padding:3px 7px;">−</button><input type="number" class="inp" id="s-${p.id}" value="${p.stock}" min="0" style="width:70px;text-align:center;padding:5px;"><button class="btn btn-sm btn-ol" onclick="adj(${p.id},1)" style="padding:3px 7px;">+</button></div></td><td><input type="number" class="inp" id="se-${p.id}" value="${p.seuil}" min="0" style="width:65px;padding:5px;"></td><td><span class="pill ${st.c}">${st.l}</span></td></tr>`;}).join('');
- document.getElementById('px-tbl').innerHTML=prods.map(p=>`<tr><td><strong>${p.nom}</strong></td><td style="font-family:var(--mono);color:var(--green);">${fmt(p.prix)} €</td><td><input type="number" class="inp" id="px-${p.id}" value="${p.prix}" step="0.01" min="0" style="width:100px;padding:5px;" oninput="updVar(${p.id},${p.prix})"></td><td id="var-${p.id}" style="font-family:var(--mono);font-size:11px;">—</td></tr>`).join('');
+ document.getElementById('px-tbl').innerHTML=prods.map(p=>`<tr><td><strong>${p.nom}</strong></td><td style="font-family:var(--mono);color:var(--green);">${fmt(p.prix)} MAD</td><td><input type="number" class="inp" id="px-${p.id}" value="${p.prix}" step="0.01" min="0" style="width:100px;padding:5px;" oninput="updVar(${p.id},${p.prix})"></td><td id="var-${p.id}" style="font-family:var(--mono);font-size:11px;">—</td></tr>`).join('');
 }
 function adj(id,d){const i=document.getElementById('s-'+id);i.value=Math.max(0,(parseInt(i.value)||0)+d);}
 function updVar(id,old){const nv=parseFloat(document.getElementById('px-'+id).value)||0,p=old?((nv-old)/old*100):0,el=document.getElementById('var-'+id);el.textContent=(p>=0?'+':'')+p.toFixed(1)+' %';el.style.color=p>0?'var(--green)':p<0?'#FF6B6B':'var(--txts)';}
